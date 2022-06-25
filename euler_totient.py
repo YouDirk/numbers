@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-###!/usr/bin/env python
+
+# Numbers, some tests with numbers, using number theory.
+# Copyright (C) 2022  Dirk "YouDirk" Lehmann.  All rights reserved.
 
 import sympy as sym
 import sympy.ntheory as nth

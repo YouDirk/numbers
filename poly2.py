@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Numbers, some tests with numbers, using number theory.
+# Copyright (C) 2022  Dirk "YouDirk" Lehmann.  All rights reserved.
+
 import sympy as sym
 
 from sympy import init_printing
