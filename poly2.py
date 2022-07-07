@@ -41,17 +41,25 @@ def _simplify_add_ofcos(wexp: Expr, wadd: Expr) -> Expr:
         a = b
         b = next(it, None)
 
+    # ??? not working for n has primefactors greater than 5 (>= 7) ???
     return x**wexp * result_add
+    #return x**wexp * result_add.evalf()
 
 def main():
     init_printing(use_unicode=None, num_columns=250)
 
-    n = 9
+    # ---
+    do_cyclotomic = False
+    n = 15
+    # ---
 
     f_n = x**n - 1
 
     g_n = 1
     for k in range(1, n+1):
+        # cyclonomic check ...
+        if do_cyclotomic and sym.igcd(k, n) != 1: continue
+
         g_n *= (x - exp(k*2*pi*I/n))
 
     print("\nf_n(x) ="); pprint(f_n)

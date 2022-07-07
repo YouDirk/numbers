@@ -5,9 +5,16 @@
 
 from math import *
 
-def _my_comb(n: int, k: int, l: int) -> int:
+def _my_comb(n: int, k: int, l: int, out: bool=False) -> int:
     if l >= 4:
-        return _my_comb(n, k, l-1) - _my_comb(n - 2, k - 1, l-2)
+        if out: print("(")
+        a = _my_comb(n, k, l-1, out)
+        if out: print(") - (", end='')
+        b = _my_comb(n - 2, k - 1, l-2, out)
+        if out: print("\n)", end='')
+        return a - b
+
+    if out: print("c(%d, %d, %d)" % (n, k, l), end='')
 
     if n < 0 or k < 0: return 0
 
@@ -36,5 +43,9 @@ def main():
 
     print("\nn=%d, l=%d, len(d) = %d" \
           % (n, l, sum(cur[0:len(cur)-1])))
+
+    #n, k, l = 8, 4, 7
+    #print("\nn=%d, k=%d, l=%d: %d"
+    #      % (n, k, l, _my_comb(n, k, l, True)))
 
 main()
