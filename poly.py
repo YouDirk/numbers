@@ -6,7 +6,13 @@
 import sympy as sym
 
 from sympy import ZZ, QQ
+from sympy.core.numbers import Expr, Number
 from sympy.abc import x
+
+def my_gcd(a: Expr, b: Expr) -> Expr:
+    while not isinstance(b, Number) and sym.degree(b) != 0:
+        (a, b) = (b, sym.rem(a, b, domain=ZZ))
+    return a
 
 # For all n>0 in N:
 #   (x^n - 1) mod phi_n(x) = 0
@@ -30,10 +36,13 @@ def main():
         divisor = (x**i - 1)
 
         result = sym.div(divisor, phi_n, domain=ZZ)
-        print("%s: (x**%d - 1)/phi_%d(x) = (%s)/(%s)\n"
+        gcd = my_gcd(divisor, phi_n)
+
+        print("\n%s: (x**%d - 1)/phi_%d(x) = (%s)/(%s)\n"
               "                           = (%s)\n"
-              "                           + (%s)"
+              "                           + (%s)\n"
+              "                     gcd() = %s"
               % (result[1] == 0, i, n , divisor, phi_n, result[0],
-                 result[1]))
+                 result[1], gcd))
 
 main()
